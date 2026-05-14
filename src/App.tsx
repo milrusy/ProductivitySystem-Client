@@ -15,7 +15,6 @@ function App() {
       <BrowserRouter>
         <Routes>
 
-          {/* Public route */}
           <Route
             path="/login"
             element={<Login />}
@@ -48,7 +47,6 @@ function App() {
             }
           />
 
-          {/* Protected route */}
           <Route
             path="/"
             element={
