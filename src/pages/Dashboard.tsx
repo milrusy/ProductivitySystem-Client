@@ -34,7 +34,6 @@ export const Dashboard = () => {
     }
   }, [user]);
 
-  // load filters
   useEffect(() => {
     api.get("/users")
       .then(res => setUsers(res.data));
@@ -43,13 +42,11 @@ export const Dashboard = () => {
       .then(res => setDepartments(res.data));
   }, []);
 
-  // load dashboard data
   useEffect(() => {
     loadData();
   }, [selectedUser, selectedDepartment]);
 
   const loadData = async () => {
-    // metrics only for selected user
     if (selectedUser !== "all") {
       const metricsRes = await api.get(
         `/metrics/user/${selectedUser}`
@@ -142,17 +139,15 @@ export const Dashboard = () => {
     >
       <h1>Employee Productivity Dashboard</h1>
       
-      {/* Filters */}
       {!isEmployee && (
         <div
-        style={{
-          display: "flex",
-          gap: "20px",
-          marginTop: "20px",
-          marginBottom: "30px"
-        }}
-      >
-        {/* User filter */}
+          style={{
+            display: "flex",
+            gap: "20px",
+            marginTop: "20px",
+            marginBottom: "30px"
+          }}
+        >
         <div>
           <label style={{ fontWeight: 600, color: "#ccc" }}>
             User
@@ -184,7 +179,6 @@ export const Dashboard = () => {
           </select>
         </div>
 
-        {/* Department filter */}
         <div>
           <label style={{ fontWeight: 600, color: "#ccc" }}>
             Department
@@ -235,7 +229,6 @@ export const Dashboard = () => {
         Export PDF
       </button>
 
-      {/* KPI */}
       {metrics && (
         <div
           style={{
@@ -266,7 +259,6 @@ export const Dashboard = () => {
         </div>
       )}
 
-      {/* Chart */}
       <div
         style={{
           background: "#1e1e2f",
