@@ -1,10 +1,10 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "https://localhost:7168/api"
+  baseURL: "https://localhost:7168/api",
 });
 
-api.interceptors.request.use(config => {
+api.interceptors.request.use((config) => {
   const auth = localStorage.getItem("auth");
 
   if (auth) {

@@ -14,14 +14,13 @@ export const Login = () => {
     try {
       const res = await api.post("/auth/login", {
         email,
-        password
+        password,
       });
 
       auth.login(res.data);
 
       navigate("/");
-    }
-    catch {
+    } catch {
       alert("Invalid credentials");
     }
   };
@@ -33,7 +32,7 @@ export const Login = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        background: "#121212"
+        background: "#121212",
       }}
     >
       <div
@@ -42,7 +41,7 @@ export const Login = () => {
           padding: "32px",
           background: "#1e1e2f",
           borderRadius: "16px",
-          color: "white"
+          color: "white",
         }}
       >
         <h2>Login</h2>
@@ -50,11 +49,11 @@ export const Login = () => {
         <input
           placeholder="Email"
           value={email}
-          onChange={e => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
           style={{
             width: "100%",
             marginTop: "16px",
-            padding: "12px"
+            padding: "12px",
           }}
         />
 
@@ -62,11 +61,11 @@ export const Login = () => {
           type="password"
           placeholder="Password"
           value={password}
-          onChange={e => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
           style={{
             width: "100%",
             marginTop: "12px",
-            padding: "12px"
+            padding: "12px",
           }}
         />
 
@@ -76,7 +75,7 @@ export const Login = () => {
             width: "100%",
             marginTop: "20px",
             padding: "12px",
-            cursor: "pointer"
+            cursor: "pointer",
           }}
         >
           Login

@@ -1,0 +1,88 @@
+.analyticsPage {
+  padding: 24px;
+  background: #0f172a;
+  color: white;
+  min-height: 100vh;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.card {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.card.clickable {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.card.clickable:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+.alertsPreview {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.alertStat {
+  flex: 1;
+  background: #0f172a;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+}
+
+.alertStat span {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.alertStat p {
+  opacity: 0.7;
+  margin-top: 6px;
+}
+
+.alertStat.critical {
+  border-left: 4px solid #ef4444;
+}
+
+.alertStat.warning {
+  border-left: 4px solid #f59e0b;
+}
+
+.recentAlerts {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.miniAlert {
+  background: #0f172a;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.miniAlert p {
+  margin-top: 4px;
+  opacity: 0.8;
+  font-size: 13px;
+}
+
+.miniAlert.critical {
+  border-left: 4px solid #ef4444;
+}
+
+.miniAlert.warning {
+  border-left: 4px solid #f59e0b;
+}

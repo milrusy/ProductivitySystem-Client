@@ -1,9 +1,4 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState
-} from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 interface AuthUser {
   token: string;
@@ -27,7 +22,7 @@ export const AuthProvider = ({ children }: any) => {
 
   useEffect(() => {
     const stored = localStorage.getItem("auth");
-      if (stored) {
+    if (stored) {
       const parsed = JSON.parse(stored);
 
       setUser(parsed);

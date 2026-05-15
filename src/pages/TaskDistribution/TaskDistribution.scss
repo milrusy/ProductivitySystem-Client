@@ -1,0 +1,67 @@
+.taskPage {
+  padding: 24px;
+  background: #0f172a;
+  color: white;
+  min-height: 100vh;
+}
+
+.kpiRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.kpiCard {
+  background: #1e293b;
+  padding: 16px;
+  border-radius: 12px;
+
+  h4 {
+    font-size: 12px;
+    opacity: 0.7;
+  }
+
+  p {
+    font-size: 22px;
+    font-weight: bold;
+  }
+}
+
+.kpiCard.success p {
+  color: #22c55e;
+}
+
+.kpiCard.danger p {
+  color: #ef4444;
+}
+
+.card {
+  background: #1e293b;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.insights {
+  margin-top: 20px;
+}
+
+.alert {
+  padding: 12px;
+  border-radius: 10px;
+  margin-top: 10px;
+  background: #334155;
+}
+
+.alert.success {
+  border-left: 4px solid #22c55e;
+}
+
+.alert.danger {
+  border-left: 4px solid #ef4444;
+}
+
+.alert.warning {
+  border-left: 4px solid #f59e0b;
+}

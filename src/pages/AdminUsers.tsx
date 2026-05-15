@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { api } from "../api/api";
 
 export const AdminUsers = () => {
-
   const [users, setUsers] = useState<any[]>([]);
 
   useEffect(() => {
@@ -28,7 +27,7 @@ export const AdminUsers = () => {
         </thead>
 
         <tbody>
-          {users.map(user => (
+          {users.map((user) => (
             <tr key={user.id}>
               <td>{user.name}</td>
               <td>{user.email}</td>

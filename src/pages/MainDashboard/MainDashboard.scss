@@ -1,0 +1,99 @@
+.page {
+  padding: 24px;
+  background: #0f172a;
+  min-height: 100vh;
+  color: white;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.logoutBtn {
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #1e293b;
+  border: 1px solid #334155;
+  color: white;
+
+  &:hover {
+    background: #334155;
+  }
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.selectGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  label {
+    font-size: 12px;
+    opacity: 0.8;
+  }
+}
+
+.select {
+  padding: 10px;
+  border-radius: 10px;
+  background: #1e293b;
+  color: white;
+  border: 1px solid #334155;
+  min-width: 200px;
+  outline: none;
+
+  &:focus {
+    border-color: #6366f1;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+
+  button,
+  a {
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: #1e293b;
+    border: 1px solid #334155;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover {
+      background: #334155;
+    }
+  }
+}
+
+.kpiRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.card {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}

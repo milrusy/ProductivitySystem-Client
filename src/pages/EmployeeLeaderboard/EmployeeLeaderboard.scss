@@ -1,0 +1,98 @@
+.empPage {
+  padding: 24px;
+  background: #0f172a;
+  color: white;
+  min-height: 100vh;
+}
+
+.card {
+  background: #1e293b;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+/* MINI CHART STYLE */
+.gridChart {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.barRow {
+  display: grid;
+  grid-template-columns: 40px 1fr 3fr 60px;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: 0.2s;
+}
+
+.barRow:hover {
+  background: #334155;
+}
+
+.barWrapper {
+  background: #0f172a;
+  height: 8px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  background: #22c55e;
+}
+
+.rank {
+  opacity: 0.7;
+}
+
+.name {
+  font-weight: 500;
+}
+
+.score {
+  text-align: right;
+}
+
+/* TABLE */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px;
+  border-bottom: 1px solid #334155;
+}
+
+.rowClickable {
+  cursor: pointer;
+}
+
+.rowClickable:hover {
+  background: #334155;
+}
+
+.danger {
+  color: #ef4444;
+}
+
+th.activeSort {
+  color: #6366f1;
+}
+
+th.sortable {
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  padding-right: 12px;
+}
+
+th.sortable:hover {
+  color: #6366f1;
+}

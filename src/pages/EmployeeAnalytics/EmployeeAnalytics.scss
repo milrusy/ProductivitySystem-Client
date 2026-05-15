@@ -1,0 +1,130 @@
+.page {
+  padding: 24px;
+  background: #0f172a;
+  color: white;
+  min-height: 100vh;
+}
+
+/* PROFILE */
+.profileCard {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.muted {
+  opacity: 0.7;
+}
+
+.meta {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  opacity: 0.8;
+  justify-content: center;
+}
+
+/* KPI */
+.kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.kpiCard {
+  background: #1e293b;
+  padding: 16px;
+  border-radius: 12px;
+}
+
+.kpiCard h4 {
+  opacity: 0.7;
+  font-size: 12px;
+}
+
+.kpiCard p {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.kpiCard.success {
+  border-left: 4px solid #22c55e;
+}
+.kpiCard.danger {
+  border-left: 4px solid #ef4444;
+}
+.kpiCard.primary {
+  border-left: 4px solid #6366f1;
+}
+
+/* TABLE */
+.card {
+  background: #1e293b;
+  padding: 16px;
+  border-radius: 12px;
+}
+
+.table {
+  width: 100%;
+  margin-top: 12px;
+  border-collapse: collapse;
+}
+
+.table td {
+  vertical-align: middle;
+  position: relative;
+}
+
+.table th,
+.table td {
+  padding: 10px;
+  border-bottom: 1px solid #334155;
+}
+
+/* BADGES */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 4px 10px;
+  border-radius: 6px;
+
+  font-size: 12px;
+  line-height: 1;
+
+  white-space: nowrap;
+
+  position: relative;
+  min-width: fit-content;
+}
+
+.badge.Done {
+  background: #22c55e;
+}
+
+.badge.InProgress {
+  background: #3b82f6;
+}
+
+.badge.Overdue {
+  background: #ef4444;
+}
+
+.badge.ToDo {
+  background: #8b8b8b;
+}
+
+.priority-Critical {
+  background: #ef4444;
+}
+
+.priority-Warning {
+  background: #f59e0b;
+}
+
+.priority-Info {
+  background: #22c55e;
+}
