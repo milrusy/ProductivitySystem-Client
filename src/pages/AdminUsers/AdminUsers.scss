@@ -1,0 +1,133 @@
+.adminPage {
+  min-height: 100vh;
+  background: #0f172a;
+  padding: 40px;
+  color: white;
+}
+
+.adminCard {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #111827;
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.adminHeader {
+  margin-bottom: 32px;
+
+  h1 {
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    color: #94a3b8;
+    line-height: 1.6;
+  }
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  label {
+    font-size: 14px;
+    color: #cbd5e1;
+    font-weight: 600;
+  }
+
+  input,
+  select {
+    background: #1e293b;
+    border: 1px solid #334155;
+    color: white;
+
+    padding: 14px 16px;
+    border-radius: 12px;
+
+    outline: none;
+    transition: 0.2s;
+  }
+
+  input:focus,
+  select:focus {
+    border-color: #6366f1;
+  }
+}
+
+.createBtn {
+  margin-top: 32px;
+
+  background: #6366f1;
+  color: white;
+
+  border: none;
+  border-radius: 14px;
+
+  padding: 14px 24px;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.createBtn:hover {
+  opacity: 0.92;
+}
+
+.createBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.passwordCard {
+  margin-top: 32px;
+
+  background: #1e293b;
+  border: 1px solid #334155;
+
+  border-radius: 18px;
+
+  padding: 24px;
+}
+
+.passwordTitle {
+  font-size: 14px;
+  color: #94a3b8;
+  margin-bottom: 12px;
+}
+
+.passwordValue {
+  font-size: 28px;
+  font-weight: 700;
+
+  background: #0f172a;
+  padding: 18px;
+  border-radius: 12px;
+
+  letter-spacing: 2px;
+
+  margin-bottom: 14px;
+}
+
+.passwordCard p {
+  color: #94a3b8;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+}

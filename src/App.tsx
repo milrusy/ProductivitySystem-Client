@@ -5,7 +5,7 @@ import { Login } from "./pages/Login";
 
 import { AuthProvider } from "./context/AuthContext";
 import { ProtectedRoute } from "./components/ProtectedRoute";
-import { AdminUsers } from "./pages/AdminUsers";
+import { AdminUsers } from "./pages/AdminUsers/AdminUsers";
 import { EmployeeAnalytics } from "./pages/EmployeeAnalytics/EmployeeAnalytics";
 import { Alerts } from "./pages/Alerts";
 import { DepartmentAnalytics } from "./pages/DepartmentAnalytics/DepartmentAnalytics";
@@ -18,72 +18,56 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
+          <Route
+            element={
+              <ProtectedRoute
+                allowedRoles={["Admin"]}
+              />
+            }>
+              <Route
+                path="/admin/users"
+                element={<AdminUsers />}
+              />
+          </Route>
           <Route path="/login" element={<Login />} />
 
           <Route
-            path="/admin/users"
             element={
-              <ProtectedRoute>
-                <AdminUsers />
-              </ProtectedRoute>
+              <ProtectedRoute
+                allowedRoles={[
+                  "Admin",
+                  "Manager"
+                ]}
+              />
             }
-          />
+          >
+            <Route
+              path="/departments"
+              element={<DepartmentAnalytics />}
+            />
 
-          <Route
-            path="/employees/:id"
-            element={
-              <ProtectedRoute>
-                <EmployeeAnalytics />
-              </ProtectedRoute>
-            }
-          />
+            <Route
+              path="/analytics/tasks"
+              element={<TaskDistribution />}
+            />
 
-          <Route
-            path="/alerts"
-            element={
-              <ProtectedRoute>
-                <Alerts />
-              </ProtectedRoute>
-            }
-          />
+            <Route
+              path="/employee-leaderboard"
+              element={<EmployeeLeaderboard />}
+            />
 
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <MainDashboard />
-              </ProtectedRoute>
-            }
-          />
-
-          <Route
-            path="/departments"
-            element={
-              <ProtectedRoute>
-                <DepartmentAnalytics />
-              </ProtectedRoute>
-            }
-          />
-
-          <Route
-            path="/employee-leaderboard"
-            element={
-              <ProtectedRoute>
-                <EmployeeLeaderboard />
-              </ProtectedRoute>
-            }
-          />
-
-          <Route
-            path="/analytics/alerts"
-            element={
-              <ProtectedRoute>
-                <AlertsAnalytics />
-              </ProtectedRoute>
-            }
-          />
+            <Route
+              path="/analytics/alerts"
+              element={<AlertsAnalytics />}
+            />
+          </Route>
 
           <Route path="/analytics/tasks" element={<TaskDistribution />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/" element={<MainDashboard />} />
+            <Route path="/alerts" element={<Alerts />} />
+            <Route path="/employees/:id" element={<EmployeeAnalytics />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </AuthProvider>

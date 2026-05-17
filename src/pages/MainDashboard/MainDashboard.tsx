@@ -16,9 +16,9 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-import { Link } from "react-router-dom";
 import { NotificationBell } from "../../components/NotificationBell/NotificationBell";
 import { AnalyticsDashboard } from "../AnalyticsDashboard/AnalyticsDashboard";
+import { useNavigate } from "react-router-dom";
 
 export const MainDashboard = () => {
   const [metrics, setMetrics] = useState<Metrics | null>(null);
@@ -36,7 +36,21 @@ export const MainDashboard = () => {
     "all",
   );
 
+  const [startDate, setStartDate] =
+    useState("");
+
+  const [endDate, setEndDate] =
+    useState("");
+
   const isEmployee = user?.role === "Employee";
+
+  const isAdmin = user?.role === "Admin";
+
+  const isManager =
+    user?.role === "Manager";
+
+  const canViewGlobal =
+    isAdmin || isManager;
 
   useEffect(() => {
     if (isEmployee && user) {
@@ -51,7 +65,12 @@ export const MainDashboard = () => {
 
   useEffect(() => {
     loadData();
-  }, [selectedUser, selectedDepartment]);
+  }, [
+    selectedUser,
+    selectedDepartment,
+    startDate,
+    endDate
+  ]);
 
   const loadData = async () => {
     let metricsUrl = "";
@@ -70,6 +89,17 @@ export const MainDashboard = () => {
       } else {
         metricsUrl = `/metrics/departments`;
       }
+      if (startDate) {
+        metricsUrl += metricsUrl.includes("?")
+          ? `&startDate=${startDate}`
+          : `?startDate=${startDate}`;
+      }
+
+      if (endDate) {
+        metricsUrl += metricsUrl.includes("?")
+          ? `&endDate=${endDate}`
+          : `?endDate=${endDate}`;
+      }
       const res = await api.get(metricsUrl);
       setDepartmentMetrics(res.data);
       setMetrics(null);
@@ -78,6 +108,17 @@ export const MainDashboard = () => {
     if (filterMode === "all") {
       setMetrics(null);
     } else {
+      if (startDate) {
+        metricsUrl += metricsUrl.includes("?")
+          ? `&startDate=${startDate}`
+          : `?startDate=${startDate}`;
+      }
+
+      if (endDate) {
+        metricsUrl += metricsUrl.includes("?")
+          ? `&endDate=${endDate}`
+          : `?endDate=${endDate}`;
+      }
       const metricsRes = await api.get(metricsUrl);
       const data = metricsRes.data;
 
@@ -92,6 +133,14 @@ export const MainDashboard = () => {
 
     if (filterMode === "department" && selectedDepartment !== "all") {
       trendsUrl += `departmentId=${selectedDepartment}`;
+    }
+
+    if (startDate) {
+      trendsUrl += `startDate=${startDate}&`;
+    }
+
+    if (endDate) {
+      trendsUrl += `endDate=${endDate}&`;
     }
 
     const trendsRes = await api.get(trendsUrl);
@@ -130,7 +179,7 @@ export const MainDashboard = () => {
     link.remove();
   };
 
-  console.log(metrics);
+  const navigate = useNavigate();
 
   return (
     <div className="page">
@@ -139,16 +188,27 @@ export const MainDashboard = () => {
         <h1>Employee Productivity Dashboard</h1>
 
         <div className="headerRight">
-          <NotificationBell />
+          <div className="headerRight">
+            <NotificationBell />
 
-          <button onClick={logout} className="logoutBtn">
-            Logout
-          </button>
+            {user?.role === "Admin" && (
+              <button
+                className="adminBtn"
+                onClick={() => navigate("/admin/users")}
+              >
+                Admin Panel
+              </button>
+            )}
+
+            <button onClick={logout} className="logoutBtn">
+              Logout
+            </button>
+          </div>
         </div>
       </div>
 
       {/* CONTROLS */}
-      {!isEmployee && (
+      {canViewGlobal && (
         <div className="controls">
           <div className="selectGroup">
             <label>User</label>
@@ -188,6 +248,30 @@ export const MainDashboard = () => {
                 </option>
               ))}
             </select>
+          </div>
+
+          <div className="selectGroup">
+            <label>Start Date</label>
+
+            <input
+              type="date"
+              value={startDate}
+              onChange={e =>
+                setStartDate(e.target.value)
+              }
+            />
+          </div>
+
+          <div className="selectGroup">
+            <label>End Date</label>
+
+            <input
+              type="date"
+              value={endDate}
+              onChange={e =>
+                setEndDate(e.target.value)
+              }
+            />
           </div>
 
           <div className="actions">
