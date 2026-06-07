@@ -57,7 +57,7 @@ export const AnalyticsDashboard = () => {
 
   return (
     <div className="analyticsPage">
-      <h1>Analytics Overview</h1>
+      <h1>Аналітична панель</h1>
 
       {/* KPI STYLE SECTION */}
       <div className="grid">
@@ -67,8 +67,8 @@ export const AnalyticsDashboard = () => {
           onClick={() => navigate("/departments")}
         >
           <h3>
-            Departments Performance
-            <p style={{ opacity: 0.5, fontSize: 12 }}>(click for details)</p>
+            Статистика за відділами
+            <p style={{ opacity: 0.5, fontSize: 12 }}>(натиснути для деталей)</p>
           </h3>
 
           <ResponsiveContainer width="100%" height={300}>
@@ -88,8 +88,8 @@ export const AnalyticsDashboard = () => {
           onClick={() => navigate("/analytics/tasks")}
         >
           <h3>
-            Task Distribution
-            <p style={{ opacity: 0.5, fontSize: 12 }}>(click for details)</p>
+            Розподіл задач
+            <p style={{ opacity: 0.5, fontSize: 12 }}>(натиснути для деталей)</p>
           </h3>
 
           <ResponsiveContainer width="100%" height={300}>
@@ -111,8 +111,8 @@ export const AnalyticsDashboard = () => {
           onClick={() => navigate("/employee-leaderboard")}
         >
           <h3>
-            Top Employees
-            <p style={{ opacity: 0.5, fontSize: 12 }}>(click for details)</p>
+            Рейтинг працівників
+            <p style={{ opacity: 0.5, fontSize: 12 }}>(натиснути для деталей)</p>
           </h3>
 
           <ResponsiveContainer width="100%" height={300}>
@@ -132,19 +132,19 @@ export const AnalyticsDashboard = () => {
           onClick={() => navigate("/analytics/alerts")}
         >
           <h3>
-            Alerts & Risks
-            <p style={{ opacity: 0.5, fontSize: 12 }}>(click for details)</p>
+            Сповіщення та Ризики
+            <p style={{ opacity: 0.5, fontSize: 12 }}>(натиснути для деталей)</p>
           </h3>
 
           <div className="alertsPreview">
             <div className="alertStat critical">
               <span>{criticalAlerts}</span>
-              <p>Critical</p>
+              <p>Критичні</p>
             </div>
 
             <div className="alertStat warning">
               <span>{warningAlerts}</span>
-              <p>Warnings</p>
+              <p>Попередження</p>
             </div>
           </div>
 

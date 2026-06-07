@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { api } from "../../api/api";
 import type { Metrics, Trend } from "../../types/metrics";
 import type { User, Department } from "../../types/common";
@@ -19,6 +19,7 @@ import {
 import { NotificationBell } from "../../components/NotificationBell/NotificationBell";
 import { AnalyticsDashboard } from "../AnalyticsDashboard/AnalyticsDashboard";
 import { useNavigate } from "react-router-dom";
+import html2canvas from "html2canvas";
 
 export const MainDashboard = () => {
   const [metrics, setMetrics] = useState<Metrics | null>(null);
@@ -41,6 +42,8 @@ export const MainDashboard = () => {
 
   const [endDate, setEndDate] =
     useState("");
+
+  const chartRef = useRef<HTMLDivElement>(null);
 
   const isEmployee = user?.role === "Employee";
 
@@ -164,18 +167,48 @@ export const MainDashboard = () => {
   };
 
   const exportPdf = async () => {
-    const response = await api.get("/reports/metrics/pdf", {
-      responseType: "blob",
-    });
+    if (!chartRef.current) return;
 
-    const url = window.URL.createObjectURL(new Blob([response.data]));
+    const canvas = await html2canvas(
+      chartRef.current
+    );
+
+    const image = canvas.toDataURL("image/png");
+
+    const response = await api.post(
+      "/reports/metrics/pdf",
+      {
+        chartImage: image,
+
+        filters: {
+          selectedUser,
+          selectedDepartment,
+          startDate: startDate || null,
+          endDate: endDate || null
+        }
+      },
+      {
+        responseType: "blob"
+      }
+    );
+
+    const url = window.URL.createObjectURL(
+      new Blob([response.data])
+    );
 
     const link = document.createElement("a");
+
     link.href = url;
-    link.setAttribute("download", "metrics-report.pdf");
+
+    link.setAttribute(
+      "download",
+      "metrics-report.pdf"
+    );
 
     document.body.appendChild(link);
+
     link.click();
+
     link.remove();
   };
 
@@ -185,23 +218,42 @@ export const MainDashboard = () => {
     <div className="page">
       {/* HEADER */}
       <div className="header">
-        <h1>Employee Productivity Dashboard</h1>
+        <h1>Продуктивність працівників</h1>
 
         <div className="headerRight">
           <div className="headerRight">
             <NotificationBell />
+
+              <button
+                className="adminBtn"
+                onClick={() => {
+                  window.open(
+                    "https://localhost:7168/hangfire",
+                    "_blank"
+                  );
+                }}
+              >
+                📈
+              </button>
 
             {user?.role === "Admin" && (
               <button
                 className="adminBtn"
                 onClick={() => navigate("/admin/users")}
               >
-                Admin Panel
+                Керувати користувачами
               </button>
             )}
 
+            <button
+              className="adminBtn"
+              onClick={() => navigate("/change-password")}
+            >
+              Змінити пароль
+            </button>
+
             <button onClick={logout} className="logoutBtn">
-              Logout
+              Вийти
             </button>
           </div>
         </div>
@@ -211,7 +263,7 @@ export const MainDashboard = () => {
       {canViewGlobal && (
         <div className="controls">
           <div className="selectGroup">
-            <label>User</label>
+            <label>Користувач</label>
             <select
               className="select"
               value={selectedUser}
@@ -221,7 +273,7 @@ export const MainDashboard = () => {
                 setSelectedDepartment("all");
               }}
             >
-              <option value="all">All users</option>
+              <option value="all">Всі користувачі</option>
               {users.map((u) => (
                 <option key={u.id} value={u.id}>
                   {u.name}
@@ -231,7 +283,7 @@ export const MainDashboard = () => {
           </div>
 
           <div className="selectGroup">
-            <label>Department</label>
+            <label>Відділ</label>
             <select
               className="select"
               value={selectedDepartment}
@@ -241,7 +293,7 @@ export const MainDashboard = () => {
                 setSelectedUser("all");
               }}
             >
-              <option value="all">All departments</option>
+              <option value="all">Всі відділи</option>
               {departments.map((d) => (
                 <option key={d.id} value={d.id}>
                   {d.name}
@@ -250,33 +302,39 @@ export const MainDashboard = () => {
             </select>
           </div>
 
-          <div className="selectGroup">
-            <label>Start Date</label>
+          <div className="dateFilters">
 
-            <input
-              type="date"
-              value={startDate}
-              onChange={e =>
-                setStartDate(e.target.value)
-              }
-            />
-          </div>
+            <div className="dateCard">
+              <label>Дата початку</label>
 
-          <div className="selectGroup">
-            <label>End Date</label>
+              <input
+                className="dateInput"
+                type="date"
+                value={startDate}
+                onChange={e =>
+                  setStartDate(e.target.value)
+                }
+              />
+            </div>
 
-            <input
-              type="date"
-              value={endDate}
-              onChange={e =>
-                setEndDate(e.target.value)
-              }
-            />
+            <div className="dateCard">
+              <label>Кінцева дата</label>
+
+              <input
+                className="dateInput"
+                type="date"
+                value={endDate}
+                onChange={e =>
+                  setEndDate(e.target.value)
+                }
+              />
+            </div>
+
           </div>
 
           <div className="actions">
-            <button onClick={exportReport}>Export CSV</button>
-            <button onClick={exportPdf}>Export PDF</button>
+            <button onClick={exportReport}>Експортувати CSV</button>
+            <button onClick={exportPdf}>Експортувати PDF</button>
           </div>
         </div>
       )}
@@ -287,14 +345,14 @@ export const MainDashboard = () => {
           <div className="card">
             <h3>{users.find((u) => u.id.toString() === selectedUser)?.name}</h3>
             <div className="kpiRow">
-              <KPIBox title="Completed Tasks" value={metrics.completedTasks} />
-              <KPIBox title="Overdue Tasks" value={metrics.overdueTasks} />
+              <KPIBox title="Виконані задачі" value={metrics.completedTasks} />
+              <KPIBox title="Прострочені задачі" value={metrics.overdueTasks} />
               <KPIBox
-                title="Avg Completion Time"
+                title="Середній час виконання"
                 value={metrics.avgCompletionTime}
               />
               <KPIBox
-                title="Productivity Score"
+                title="Оцінка продуктивності"
                 value={metrics.productivityScore}
               />
             </div>
@@ -308,11 +366,11 @@ export const MainDashboard = () => {
             <div key={d.departmentName} className="card">
               <h3>{d.departmentName}</h3>
               <div className="kpiRow">
-                <KPIBox title="Employees" value={d.employeesCount} />
-                <KPIBox title="Completed" value={d.completedTasks} />
-                <KPIBox title="Overdue" value={d.overdueTasks} />
+                <KPIBox title="Кількість працівників" value={d.employeesCount} />
+                <KPIBox title="Завершені задачі" value={d.completedTasks} />
+                <KPIBox title="Прострочені задачі" value={d.overdueTasks} />
                 <KPIBox
-                  title="Avg Productivity"
+                  title="Середня оцінка продуктивності"
                   value={d.averageProductivity}
                 />
               </div>
@@ -322,8 +380,8 @@ export const MainDashboard = () => {
       )}
 
       {/* TREND CHART */}
-      <div className="card">
-        <h3>Productivity Trend</h3>
+      <div className="card" ref={chartRef}>
+        <h3>Тенденція продуктивності</h3>
 
         <ResponsiveContainer width="100%" height={380}>
           <LineChart data={trends}>

@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { MainDashboard } from "./pages/MainDashboard/MainDashboard";
-import { Login } from "./pages/Login";
+import { Login } from "./pages/Login/Login";
 
 import { AuthProvider } from "./context/AuthContext";
 import { ProtectedRoute } from "./components/ProtectedRoute";
@@ -12,6 +12,7 @@ import { DepartmentAnalytics } from "./pages/DepartmentAnalytics/DepartmentAnaly
 import { TaskDistribution } from "./pages/TaskDistribution/TaskDistribution";
 import { EmployeeLeaderboard } from "./pages/EmployeeLeaderboard/EmployeeLeaderboard";
 import { AlertsAnalytics } from "./pages/AlertsAnalytics/AlertsAnalytics";
+import { ChangePasswordPage } from "./pages/ChangePassword/ChangePassword";
 
 function App() {
   return (
@@ -68,6 +69,8 @@ function App() {
             <Route path="/alerts" element={<Alerts />} />
             <Route path="/employees/:id" element={<EmployeeAnalytics />} />
           </Route>
+
+          <Route path="/change-password" element={<ChangePasswordPage />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

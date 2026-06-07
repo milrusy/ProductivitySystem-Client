@@ -12,7 +12,7 @@ export const EmployeeAnalytics = () => {
     api.get(`/users/${id}/analytics`).then((res) => setEmployee(res.data));
   }, [id]);
 
-  if (!employee) return <div className="page">Loading...</div>;
+  if (!employee) return <div className="page">Завантаження...</div>;
 
   return (
     <div className="page">
@@ -32,37 +32,37 @@ export const EmployeeAnalytics = () => {
       {/* KPI SECTION */}
       <div className="kpiGrid">
         <div className="kpiCard success">
-          <h4>Completed</h4>
+          <h4>Завершено</h4>
           <p>{employee.completedTasks}</p>
         </div>
 
         <div className="kpiCard danger">
-          <h4>Overdue</h4>
+          <h4>Прострочено</h4>
           <p>{employee.overdueTasks}</p>
         </div>
 
         <div className="kpiCard">
-          <h4>Avg Time</h4>
+          <h4>Середній час виконання задачі</h4>
           <p>{employee.avgCompletionTime}</p>
         </div>
 
         <div className="kpiCard primary">
-          <h4>Productivity</h4>
+          <h4>Продуктивність</h4>
           <p>{employee.productivityScore}%</p>
         </div>
       </div>
 
       {/* TASKS */}
       <div className="card">
-        <h3>Tasks Overview</h3>
+        <h3>Задачі</h3>
 
         <table className="table">
           <thead>
             <tr>
-              <th>Title</th>
-              <th>Status</th>
-              <th>Priority</th>
-              <th>Deadline</th>
+              <th>Назва</th>
+              <th>Статус</th>
+              <th>Пріоритет</th>
+              <th>Термін виконання</th>
             </tr>
           </thead>
 
@@ -72,7 +72,7 @@ export const EmployeeAnalytics = () => {
                 <td>{task.title}</td>
 
                 <td>
-                  <span className={`badge ${task.status}`}>{task.status}</span>
+                  <span className={`badge ${task.status.replace(/\s+/g, '-').toLowerCase()}`}>{task.status}</span>
                 </td>
 
                 <td>

@@ -36,33 +36,33 @@ export const TaskDistribution = () => {
     {
       type: "danger",
       condition: data.overdue > data.completed,
-      title: "Workload imbalance detected",
-      message: "Overdue tasks exceed completed tasks.",
-      action: "Consider redistributing tasks or increasing capacity.",
+      title: "Виявлено дисбаланс за статусами задач",
+      message: "Кількість прострочених задач переважає кількість виконаних.",
+      action: "Варто розглянути перерозподіл задач по працівникам.",
     },
 
     {
       type: "warning",
       condition: data.inProgress > data.completed,
-      title: "High work in progress",
-      message: "More tasks are in progress than completed.",
-      action: "Monitor bottlenecks in workflow stages.",
+      title: "Багато задач виконуються у поточний момент часу",
+      message: "Кількість задач у процесі перебільшує кількість виконаних задач.",
+      action: "Варто звернути увагу на блокери у задачах.",
     },
 
     {
       type: "success",
       condition: completionRate > 70,
-      title: "Healthy productivity level",
-      message: "Completion rate is above 70%.",
-      action: "Maintain current workflow efficiency.",
+      title: "Нормальний рівень продуктивності",
+      message: "Частка виконаних задач більше ніж 70%.",
+      action: "Поточний розподіл задач є ефективним.",
     },
 
     {
       type: "info",
       condition: total < 10,
-      title: "Low task volume",
-      message: "Task volume is unusually low.",
-      action: "Verify if data ingestion is complete.",
+      title: "Низька кількість задач",
+      message: "Кількість задач нижче ніж зазвичай.",
+      action: "Варто перевірити коректність оновлення даних.",
     },
   ];
 
@@ -70,34 +70,34 @@ export const TaskDistribution = () => {
 
   return (
     <div className="taskPage">
-      <h1>Task Distribution</h1>
+      <h1>Статистика по задачам</h1>
 
       {/* KPI ROW */}
       <div className="kpiRow">
         <div className="kpiCard">
-          <h4>Total Tasks</h4>
+          <h4>Загальна кількість задач</h4>
           <p>{total}</p>
         </div>
 
         <div className="kpiCard success">
-          <h4>Completed</h4>
+          <h4>Завершено</h4>
           <p>{data.completed}</p>
         </div>
 
         <div className="kpiCard danger">
-          <h4>Overdue</h4>
+          <h4>Прострочено</h4>
           <p>{data.overdue}</p>
         </div>
 
         <div className="kpiCard">
-          <h4>Completion Rate</h4>
+          <h4>Відсоток завершених задач</h4>
           <p>{completionRate.toFixed(1)}%</p>
         </div>
       </div>
 
       {/* CHART */}
       <div className="card">
-        <h3>Task Status Overview</h3>
+        <h3>Розподіл задач за статусами</h3>
 
         <ResponsiveContainer width="100%" height={350}>
           <PieChart>
@@ -114,11 +114,11 @@ export const TaskDistribution = () => {
 
       {/* INSIGHTS */}
       <div className="insights">
-        <h3>Insights</h3>
+        <h3>Аналіз</h3>
 
         {activeInsights.length === 0 && (
           <div className="alert info">
-            📊 No anomalies detected — system is stable
+            📊 Не виявлено аномалій - система стабільна
           </div>
         )}
 

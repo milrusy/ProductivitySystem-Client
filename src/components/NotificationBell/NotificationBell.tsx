@@ -60,13 +60,13 @@ export const NotificationBell = () => {
       {open && (
         <div className="dropdown">
           <div className="dropdownHeader">
-            <h3>Notifications</h3>
+            <h3>Сповіщення</h3>
 
             <span className="notificationCount">{alerts.length}</span>
           </div>
 
           {alerts.length === 0 && (
-            <div className="emptyState">No unread notifications</div>
+            <div className="emptyState">Немає непрочитаних сповіщень</div>
           )}
 
           {alerts.map((alert) => (
@@ -92,7 +92,7 @@ export const NotificationBell = () => {
                 className="readButton"
                 onClick={() => markAsRead(alert.id)}
               >
-                Mark read
+                Прочитати
               </button>
             </div>
           ))}

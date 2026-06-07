@@ -38,36 +38,36 @@ export const DepartmentAnalytics = () => {
     <div className="depPage">
       {/* HEADER */}
       <div className="header">
-        <h1>Department Analytics</h1>
-        <p>Overview of organizational performance</p>
+        <h1>Статистика за відділами</h1>
+        <p>Загальна статистика щодо продуктивності за відділами</p>
       </div>
 
       {/* KPI */}
       <div className="kpiGrid">
         <div className="kpiCard">
-          <div className="label">Employees</div>
+          <div className="label">Кількість працівників</div>
           <div className="value">{totalEmployees}</div>
         </div>
 
         <div className="kpiCard">
-          <div className="label">Completed Tasks</div>
+          <div className="label">Завершені задачі</div>
           <div className="value">{totalCompleted}</div>
         </div>
 
         <div className="kpiCard danger">
-          <div className="label">Overdue Tasks</div>
+          <div className="label">Прострочені задачі</div>
           <div className="value">{totalOverdue}</div>
         </div>
 
         <div className="kpiCard">
-          <div className="label">Avg Productivity</div>
+          <div className="label">Середня оцінка продуктивності</div>
           <div className="value">{avgProductivity.toFixed(1)}</div>
         </div>
       </div>
 
       {/* CHART */}
       <div className="card">
-        <h3>Productivity by Department</h3>
+        <h3>Продуктивність за відділами</h3>
 
         <ResponsiveContainer width="100%" height={350}>
           <BarChart data={data}>
@@ -81,16 +81,16 @@ export const DepartmentAnalytics = () => {
 
       {/* TABLE */}
       <div className="card">
-        <h3>Department Breakdown</h3>
+        <h3>Дані за відділом</h3>
 
         <table>
           <thead>
             <tr>
-              <th>Department</th>
-              <th>Employees</th>
-              <th>Completed</th>
-              <th>Overdue</th>
-              <th>Productivity</th>
+              <th>Відділ</th>
+              <th>Працівники</th>
+              <th>Завершено</th>
+              <th>Прострочено</th>
+              <th>Продуктивність</th>
             </tr>
           </thead>
 

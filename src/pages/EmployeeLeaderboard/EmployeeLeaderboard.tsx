@@ -69,11 +69,11 @@ export const EmployeeLeaderboard = () => {
 
   return (
     <div className="empPage">
-      <h1>Employee Leaderboard</h1>
+      <h1>Рейтинг працівників</h1>
 
       {/* OPTIONAL: mini chart */}
       <div className="card">
-        <h3>Productivity Overview</h3>
+        <h3>Оцінка продуктивності</h3>
 
         <div className="gridChart">
           {topTen.map((e, index) => (
@@ -103,19 +103,19 @@ export const EmployeeLeaderboard = () => {
 
       {/* FULL TABLE */}
       <div className="card">
-        <h3>Full Ranking</h3>
+        <h3>Повний список</h3>
 
         <table ref={tableRef}>
           <thead>
             <tr>
-              <th>Rank</th>
+              <th>Номер</th>
 
               <th onClick={() => handleSort("name")} className="sortable">
-                Name <SortIcon active={sortBy === "name"} dir={sortDir} />
+                Ім'я <SortIcon active={sortBy === "name"} dir={sortDir} />
               </th>
 
               <th onClick={() => handleSort("department")} className="sortable">
-                Department{" "}
+                Відділ{" "}
                 <SortIcon active={sortBy === "department"} dir={sortDir} />
               </th>
 
@@ -123,7 +123,7 @@ export const EmployeeLeaderboard = () => {
                 onClick={() => handleSort("completedTasks")}
                 className="sortable"
               >
-                Completed{" "}
+                Завершено{" "}
                 <SortIcon active={sortBy === "completedTasks"} dir={sortDir} />
               </th>
 
@@ -131,7 +131,7 @@ export const EmployeeLeaderboard = () => {
                 onClick={() => handleSort("overdueTasks")}
                 className="sortable"
               >
-                Overdue{" "}
+                Прострочено{" "}
                 <SortIcon active={sortBy === "overdueTasks"} dir={sortDir} />
               </th>
 
@@ -139,7 +139,7 @@ export const EmployeeLeaderboard = () => {
                 onClick={() => handleSort("productivityScore")}
                 className="sortable"
               >
-                Score{" "}
+                Оцінка{" "}
                 <SortIcon
                   active={sortBy === "productivityScore"}
                   dir={sortDir}

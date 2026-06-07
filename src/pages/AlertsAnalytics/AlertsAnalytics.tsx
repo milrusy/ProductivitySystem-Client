@@ -5,6 +5,12 @@ import "./AlertsAnalytics.scss";
 
 type AlertSeverity = "Critical" | "Warning" | "Info";
 
+const severityTranslations: Record<AlertSeverity, string> = {
+  Critical: "Критичне",
+  Warning: "Попередження",
+  Info: "Інформаційне"
+};
+
 type Alert = {
   id: number;
   employeeName: string;
@@ -73,39 +79,38 @@ export const AlertsAnalytics = () => {
       {/* HERO */}
       <div className="heroCard">
         <div>
-          <h1>Alerts & Risk Monitoring</h1>
+          <h1>Сповіщення і ризики</h1>
 
           <p>
-            Monitor productivity anomalies, employee risks and operational
-            issues across the organization.
+            Моніторинг аномалій метрик, ризики щодо працівників
           </p>
         </div>
 
-        <div className="heroBadge">{unreadCount} unread</div>
+        <div className="heroBadge">{unreadCount} непрочитаних</div>
       </div>
 
       {/* KPI */}
       <div className="kpiGrid">
         <div className="kpiCard critical">
-          <div className="kpiLabel">Critical Alerts</div>
+          <div className="kpiLabel">Критичні</div>
 
           <div className="kpiValue">{criticalCount}</div>
         </div>
 
         <div className="kpiCard warning">
-          <div className="kpiLabel">Warnings</div>
+          <div className="kpiLabel">Попередження</div>
 
           <div className="kpiValue">{warningCount}</div>
         </div>
 
         <div className="kpiCard info">
-          <div className="kpiLabel">Informational</div>
+          <div className="kpiLabel">Інформаційні</div>
 
           <div className="kpiValue">{infoCount}</div>
         </div>
 
         <div className="kpiCard unread">
-          <div className="kpiLabel">Unread</div>
+          <div className="kpiLabel">Непрочитані</div>
 
           <div className="kpiValue">{unreadCount}</div>
         </div>
@@ -117,25 +122,25 @@ export const AlertsAnalytics = () => {
           className={filter === "All" ? "filterBtn active" : "filterBtn"}
           onClick={() => setFilter("All")}
         >
-          All
+          Всі
         </button>
         <button
           className={filter === "Critical" ? "filterBtn active" : "filterBtn"}
           onClick={() => setFilter("Critical")}
         >
-          Critical
+          Критичні
         </button>
         <button
           className={filter === "Warning" ? "filterBtn active" : "filterBtn"}
           onClick={() => setFilter("Warning")}
         >
-          Warning
+          Попередження
         </button>
         <button
           className={filter === "Info" ? "filterBtn active" : "filterBtn"}
           onClick={() => setFilter("Info")}
         >
-          Info
+          Інформаційні
         </button>
       </div>
       <div className="filterRow">
@@ -143,21 +148,21 @@ export const AlertsAnalytics = () => {
           className={readFilter === "All" ? "filterBtn active" : "filterBtn"}
           onClick={() => setReadFilter("All")}
         >
-          All
+          Всі
         </button>
 
         <button
           className={readFilter === "Unread" ? "filterBtn active" : "filterBtn"}
           onClick={() => setReadFilter("Unread")}
         >
-          Unread
+          Непрочитані
         </button>
 
         <button
           className={readFilter === "Read" ? "filterBtn active" : "filterBtn"}
           onClick={() => setReadFilter("Read")}
         >
-          Read
+          Прочитані
         </button>
       </div>
 
@@ -165,9 +170,9 @@ export const AlertsAnalytics = () => {
       <div className="alertsGrid">
         {sortedAlerts.length === 0 && (
           <div className="emptyState">
-            <h3>No alerts found</h3>
+            <h3>Сповіщень не знайдено</h3>
 
-            <p>There are currently no alerts matching this filter.</p>
+            <p>Не знайдено сповіщень відповідно до заданого фільтру.</p>
           </div>
         )}
 
@@ -186,10 +191,10 @@ export const AlertsAnalytics = () => {
 
                 <div className="badges">
                   <span className={`severity ${alert.severity.toLowerCase()}`}>
-                    {alert.severity}
+                    {severityTranslations[alert.severity]}
                   </span>
 
-                  {!alert.isRead && <span className="unreadBadge">Unread</span>}
+                  {!alert.isRead && <span className="unreadBadge">Непрочитане</span>}
                 </div>
               </div>
 
@@ -198,7 +203,7 @@ export const AlertsAnalytics = () => {
                   className="readBtn"
                   onClick={() => markAsRead(alert.id)}
                 >
-                  Mark as read
+                  Прочитати
                 </button>
               )}
             </div>

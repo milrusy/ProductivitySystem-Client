@@ -28,8 +28,6 @@ export const AdminUsers = () => {
 
   const createUser = async () => {
     try {
-      setLoading(true);
-
       const res = await api.post("/users", {
         name,
         email,
@@ -37,17 +35,12 @@ export const AdminUsers = () => {
         role
       });
 
-      setGeneratedPassword(
-        res.data.temporaryPassword
-      );
+      setGeneratedPassword(res.data.temporaryPassword);
 
       setName("");
       setEmail("");
-      setDepartmentId("");
-      setRole("Employee");
-    }
-    finally {
-      setLoading(false);
+    } catch (err: any) {
+      alert(err?.response?.data || "Error creating user");
     }
   };
 
@@ -58,12 +51,10 @@ export const AdminUsers = () => {
 
         <div className="adminHeader">
           <div>
-            <h1>User Administration</h1>
+            <h1>Керування користувачами</h1>
 
             <p>
-              Create employee accounts,
-              assign departments and generate
-              temporary credentials.
+              Створіть акаунт працівника і отримайте тимчасовий пароль
             </p>
           </div>
         </div>
@@ -71,7 +62,7 @@ export const AdminUsers = () => {
         <div className="formGrid">
 
           <div className="inputGroup">
-            <label>Full Name</label>
+            <label>Повне ім'я</label>
 
             <input
               placeholder="John Doe"
@@ -83,7 +74,7 @@ export const AdminUsers = () => {
           </div>
 
           <div className="inputGroup">
-            <label>Email</label>
+            <label>Електронна пошта</label>
 
             <input
               placeholder="john@company.com"
@@ -95,7 +86,7 @@ export const AdminUsers = () => {
           </div>
 
           <div className="inputGroup">
-            <label>Department</label>
+            <label>Відділ</label>
 
             <select
               value={departmentId}
@@ -104,7 +95,7 @@ export const AdminUsers = () => {
               }
             >
               <option value="">
-                Select Department
+                Обрати відділ
               </option>
 
               {departments.map(dep => (
@@ -119,7 +110,7 @@ export const AdminUsers = () => {
           </div>
 
           <div className="inputGroup">
-            <label>Role</label>
+            <label>Роль</label>
 
             <select
               value={role}
@@ -128,11 +119,11 @@ export const AdminUsers = () => {
               }
             >
               <option value="Employee">
-                Employee
+                Працівник
               </option>
 
               <option value="Admin">
-                Admin
+                Адміністратор
               </option>
             </select>
           </div>
@@ -145,15 +136,15 @@ export const AdminUsers = () => {
           disabled={loading}
         >
           {loading
-            ? "Creating..."
-            : "Create User"}
+            ? "Створення..."
+            : "Створити користувача"}
         </button>
 
         {generatedPassword && (
           <div className="passwordCard">
 
             <div className="passwordTitle">
-              Temporary Password
+              Тимчасовий пароль
             </div>
 
             <div className="passwordValue">
@@ -161,9 +152,7 @@ export const AdminUsers = () => {
             </div>
 
             <p>
-              Share this password securely
-              with the employee. They should
-              change it after first login.
+              Безпечно передайте цей пароль працівнику. Пароль необхідно змінити після першої авторизації в системі.
             </p>
 
           </div>
